@@ -5,24 +5,22 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    public Transform[] waypoints;
-    private int currentWaypointIndex = 0;
-    private NavMeshAgent agent;
+    NavMeshAgent m_Agent;
+    public Transform[] goals = new Transform[5];
+    private int m_NextGoal = 1;
 
-    // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        agent.SetDestination(waypoints[currentWaypointIndex].position);
+        m_Agent = GetComponent<NavMeshAgent>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        float distance = Vector3.Distance(m_Agent.transform.position, goals[m_NextGoal].position);
+        if (distance < 2.5f)
         {
-            currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
-            agent.SetDestination(waypoints[currentWaypointIndex].position);
+            m_NextGoal = m_NextGoal != goals.Length - 1 ? m_NextGoal + 1 : 1;
         }
+        m_Agent.destination = goals[m_NextGoal].position;
     }
 }

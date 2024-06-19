@@ -7,8 +7,8 @@ using System;
 
 public class EnemyLapController : MonoBehaviour
 { 
-    public float vueltaEnemy = 0;
-    public float numVueltasEnemy = 2;
+    public float vueltaEnemy;
+    public float numVueltasEnemy;
     [SerializeField] private Canvas menuGameOver;
 
     private bool checkpoint1E = false;
