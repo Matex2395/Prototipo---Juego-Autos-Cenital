@@ -10,6 +10,7 @@ public class EnemyLapController : MonoBehaviour
     public float vueltaEnemy;
     public float numVueltasEnemy;
     [SerializeField] private Canvas menuGameOver;
+    [SerializeField] private AudioSource youLoseAudio;
 
     private bool checkpoint1E = false;
     private bool checkpoint2E = false;
@@ -41,6 +42,7 @@ public class EnemyLapController : MonoBehaviour
                 Debug.Log("Perdiste");
                 menuGameOver.gameObject.SetActive(true);
                 Time.timeScale = 0;
+                youLoseAudio.Play();
             }
         }
 

@@ -12,6 +12,7 @@ public class PlayerLapController : MonoBehaviour
     public float vuelta = 0;
     public float numVueltas = 2;
     [SerializeField] private Canvas menuWin;
+    [SerializeField] private AudioSource youWinAudio;
 
     private bool checkpoint1 = false;
     private bool checkpoint2 = false;
@@ -50,6 +51,7 @@ public class PlayerLapController : MonoBehaviour
             if (vuelta==numVueltas)
             {
                 Debug.Log("Has Ganado");
+                youWinAudio.Play();
                 menuWin.gameObject.SetActive(true);
                 Time.timeScale = 0;
                 
