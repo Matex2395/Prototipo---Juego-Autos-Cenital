@@ -21,12 +21,16 @@ public class CarController : MonoBehaviour
     [SerializeField] private Transform frontLeftWheelTransform, frontRightWheelTransform;
     [SerializeField] private Transform rearLeftWheelTransform, rearRightWheelTransform;
 
+    // Particle System
+    [SerializeField] private ParticleSystem particleSystem;
+
     private void FixedUpdate()
     {
         GetInput();
         HandleMotor();
         HandleSteering();
         UpdateWheels();
+        HandleParticles();
     }
 
     private void GetInput()
@@ -79,5 +83,17 @@ public class CarController : MonoBehaviour
         wheelCollider.GetWorldPose(out pos, out rot);
         wheelTransform.rotation = rot;
         wheelTransform.position = pos;
+    }
+
+    private void HandleParticles()
+    {
+        if (verticalInput > 0 && !particleSystem.isPlaying)
+        {
+            particleSystem.Play();
+        }
+        else if ((verticalInput <= 0 && particleSystem.isPlaying) || (isBreaking && particleSystem.isPlaying))
+        {
+            particleSystem.Stop();
+        }
     }
 }

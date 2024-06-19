@@ -51,10 +51,10 @@ public class PlayerLapController : MonoBehaviour
             if (vuelta==numVueltas)
             {
                 Debug.Log("Has Ganado");
-                youWinAudio.Play();
                 menuWin.gameObject.SetActive(true);
                 Time.timeScale = 0;
-                
+                youWinAudio.Play();
+
             }
         }
 
